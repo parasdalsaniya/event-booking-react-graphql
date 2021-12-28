@@ -3,20 +3,6 @@ const User = require('../../models/user');
 const { transformEvent } = require('./merge');
 
 
-const user = async userId => {
-  try {
-    const user = await User.findById(userId);
-    return {
-      ...user._doc,
-      _id: user.id,
-      createdEvents: events.bind(this, user._doc.createdEvents),
-    };
-  } catch (err) {
-    throw err;
-  }
-}
-
-
 module.exports = {
   
   events: async () => {
@@ -30,7 +16,10 @@ module.exports = {
     }  
   },
 
-  createEvent: async args => {
+  createEvent: async (args, req) => {
+    if (!req.isAuth) {
+      throw new Error('Unauthenticated!');
+    }
     const event = new Event({
       title: args.eventInput.title,
       description: args.eventInput.description,
