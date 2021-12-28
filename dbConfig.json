@@ -1,0 +1,7 @@
+{
+  "env": {
+    "MONGO_USER": "parasdalsaniya",
+    "MONGO_PASSWORD": "parasdalsaniya",
+    "MONGO_DB": "event-react-raphql"
+  }
+}
